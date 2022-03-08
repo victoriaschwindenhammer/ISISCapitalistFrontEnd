@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {Services} from "./Services";
-import { World } from './world';
+import { World} from './world';
+import ProductComponent from './Product'
 import { updateShorthandPropertyAssignment } from 'typescript';
 
 
@@ -21,15 +22,15 @@ function App() {
   return (
     <div className="App">
       <div className="header">
-        <div> <img src={services.server + world.logo}/> <span> {world.name} </span> logo  + nom  </div>
-        <div> argent </div>
+        <div> <img src={services.server + world.logo}/><span> {world.name} </span> </div>
+        <div> {world.money}  </div>
         <div> multiplicateur </div>
         <div> ID du joueur </div>
       </div>
       <div className="main">
         <div> liste des boutons de menu </div>
         <div className="product">
-          <div> premier produit </div>
+          <div> <ProductComponent prod={ world.products.product[0] } services={ services }/> </div>
           <div> second produit </div>
           <div> troisième produit </div>
           <div> quatrième produit </div>
