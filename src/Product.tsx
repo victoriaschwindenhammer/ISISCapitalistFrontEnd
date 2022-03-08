@@ -1,14 +1,20 @@
 
-import {Services} from "./Services";
-import {Product} from "./world";
+import { Services } from "./Services";
+import { Product } from "./world";
 
 type ProductProps = {
     prod: Product
     services: Services
-   }
-   export default function ProductComponent({ prod, services } : ProductProps)
-   {
-   return (
-    <div> … </div>
+}
+export default function ProductComponent({prod, services }: ProductProps) {
+    return (
+        <div className="Product">
+            <div><img src={services.server +prod.logo} /></div>
+            <div>{prod.name}</div>
+            <div>Acheter pour : {prod.cout} $</div>
+            <div>Rapporte : {prod.revenu} $</div>
+            <div>Temps restant : {prod.timeleft}s</div>
+        </div>
     )
-   }
+
+}
