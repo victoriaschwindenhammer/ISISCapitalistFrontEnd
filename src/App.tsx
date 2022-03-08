@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
 import {Services} from "./Services";
 import { World} from './world';
 import ProductComponent from './Product'
-import { updateShorthandPropertyAssignment } from 'typescript';
+import { transform } from "./utils";
+//import { updateShorthandPropertyAssignment } from 'typescript';
 
 
 function App() {
@@ -19,13 +20,21 @@ function App() {
       )
      
      }, [])
+  //je sais pas pq le titre est en deux fois...
   return (
+    
     <div className="App">
       <div className="header">
-        <div> <img src={services.server + world.logo}/><span> {world.name} </span> </div>
-        <div> {world.money}  </div>
-        <div> multiplicateur </div>
-        <div> ID du joueur </div>
+      <img src={services.server + world.logo} />
+        <label className="logo">{world.name}</label>
+            <div className ="titre">
+            Mario Capitalist
+            </div>
+        <ul className="listeHeader">
+          <li>{services.user}</li>
+          <li>Score : {world.score}</li>
+          <li>Money : <span dangerouslySetInnerHTML={{ __html: transform(world.money) }} /> $</li>
+        </ul>
       </div>
       <div className="main">
         <div> liste des boutons de menu </div>
@@ -39,6 +48,7 @@ function App() {
         </div>
       </div>
     </div>
+    
   );
 }
 
