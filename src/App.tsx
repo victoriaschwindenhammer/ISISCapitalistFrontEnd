@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {Services} from "../Services";
-import { World } from '../world';
+import {Services} from "./Services";
+import { World } from './world';
+import { updateShorthandPropertyAssignment } from 'typescript';
 
 
 function App() {
+  const [services, setServices] = useState(new Services(""))
+  const [world, setWorld] = useState(new World())
+    useEffect(() => {
+      let services = new Services("")
+      setServices(services)
+      services.getWorld().then(response => {
+      setWorld(response.data)
+      }
+      )
+     
+     }, [])
   return (
     <div className="App">
       <div className="header">
-        <div> logo monde </div>
+        <div> <img src={services.server + world.logo}/> <span> {world.name} </span> logo  + nom  </div>
         <div> argent </div>
         <div> multiplicateur </div>
         <div> ID du joueur </div>
@@ -26,25 +38,9 @@ function App() {
         </div>
       </div>
     </div>
-
-
   );
 }
 
-const [services, setServices] = useState(new Services(""))
-const [world, setWorld] = useState(new World())
-
-useEffect(() => {
-
-  let services = new Services(username)
-  setServices(services)
-  services.getWorld().then(response => {
-  setWorld(response.data)
-  }
-  )
- 
- }, [])
- 
 
 
 export default App;
