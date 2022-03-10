@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-//import logo from './logo.svg';
+import logo from './logo.svg';
 import './App.css';
 import { Services } from "./Services";
 import { World } from './world';
 import ProductComponent from './Product'
 import { transform } from "./utils";
-//import { updateShorthandPropertyAssignment } from 'typescript';
 
+
+
+  
 
 function App() {
   const [services, setServices] = useState(new Services(""))
@@ -20,7 +22,9 @@ function App() {
     )
 
   }, [])
-  //je sais pas pq le titre est en deux fois...
+
+  const [showManager, setShow] = useState(false);
+  
   return (
 
     <div className="App">
@@ -44,13 +48,39 @@ function App() {
           <div> 4 </div>
           <div> 5 </div>
           <div> 6 </div>
+          </div>
+          </div>
+          <div> {showManager &&
+        < div className="modal">
+        <div>
+          <h1 className="title">Managers make you feel better !</h1>
+        </div>
+        <div>
+          <div>
+            {world.managers.pallier.filter(manager => !manager.unlocked).map(
+              manager => (
+                <div key={manager.idcible} className="managergrid">
+                  <div className="composantGrid" id="managerLogo">
+                    <img alt="manager logo" className="round" src={services.server + manager.logo} />
+                  </div>
+                  <div className="composantGrid" id="infosManagers">
+                    <div> {manager.name} </div>
+                    <div> {world.products.product[manager.idcible - 1].name}</div>
+                    <div className="composantGrid" id="managerSeuil"> {manager.seuil} </div>
+                  </div>
+                  <div id="boutonEngager">
+                    <button disabled={world.money < manager.seuil}> Engager! </button>
+                  </div>
+                </div>
+              ))}
+          </div>
+          <button onClick={() => setShow(false)}>Close</button>
         </div>
       </div>
-    </div>
+                     } </div>
 
-  );
-}
+                     </div> );
+    }
 
-
-
-export default App;
+                  
+              export default App;
