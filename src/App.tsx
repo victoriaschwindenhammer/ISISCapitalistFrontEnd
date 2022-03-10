@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-//import logo from './logo.svg';
+import logo from './logo.svg';
 import './App.css';
 import { Services } from "./Services";
 import { World } from './world';
 import ProductComponent from './Product'
 import { transform } from "./utils";
-//import { updateShorthandPropertyAssignment } from 'typescript';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Manager from "./managers";
 
 function App() {
   const [services, setServices] = useState(new Services(""))
@@ -20,19 +20,24 @@ function App() {
     )
 
   }, [])
-  return (
 
+  const [showManager, setShow] = useState(false);
+  function fonction(){
+    setShow(true);
+  }
+
+  return (
     <div className="App">
       <div className="header">
         <div ><img className="round" src={services.server + world.logo} /></div>
         <div className="titre">
         {world.name}
         </div>
-        <ul className="listeHeader">
+        <div className="listeHeader">
           <li>{services.user}</li>
           <li>Score : {world.score}</li>
           <li>Money : <span dangerouslySetInnerHTML={{ __html: transform(world.money) }} /> $</li>
-        </ul>
+        </div>
       </div>
       <div className="main">
         <div> liste des boutons de menu </div>
@@ -45,11 +50,14 @@ function App() {
           <div> <ProductComponent prod={world.products.product[5]} services={services} /> </div>
         </div>
       </div>
+      <div className="listbtn">
+        <button onClick={() => fonction()}><i className="btnManagers"></i>Managers</button>
+        <div> <Manager world2 = {world} services = {services}/> </div>
+        </div>
     </div>
+    );
+    } 
+    export default App;
 
-  );
-}
-
-
-
-export default App;
+                  
+              
