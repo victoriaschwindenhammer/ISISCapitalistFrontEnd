@@ -22,7 +22,8 @@ function App() {
   }, [])
 
   const [showManager, setShow] = useState(false);
-  function fonction(){
+
+  function afficher() {
     setShow(true);
   }
 
@@ -31,7 +32,7 @@ function App() {
       <div className="header">
         <div ><img className="round" src={services.server + world.logo} /></div>
         <div className="titre">
-        {world.name}
+          {world.name}
         </div>
         <div className="listeHeader">
           <li>{services.user}</li>
@@ -40,7 +41,13 @@ function App() {
         </div>
       </div>
       <div className="main">
-        <div> liste des boutons de menu </div>
+        <ul>
+          <li><button onClick={() => afficher()}><i className="btnManagers"></i>Managers </button>
+            <div> {showManager &&
+              <div className="modal"> <Manager world2={world} services={services} /> </div>
+            }
+            </div> </li>
+        </ul>
         <div className="products">
           <div> <ProductComponent prod={world.products.product[0]} services={services} /> </div>
           <div> <ProductComponent prod={world.products.product[1]} services={services} /> </div>
@@ -51,13 +58,13 @@ function App() {
         </div>
       </div>
       <div className="listbtn">
-        <button onClick={() => fonction()}><i className="btnManagers"></i>Managers</button>
-        <div> <Manager world2 = {world} services = {services}/> </div>
-        </div>
-    </div>
-    );
-    } 
-    export default App;
 
-                  
-              
+
+      </div>
+    </div>
+  );
+}
+export default App;
+
+
+
