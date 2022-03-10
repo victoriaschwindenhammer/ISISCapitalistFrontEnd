@@ -10,13 +10,10 @@ import { World } from './world';
     }
     
     export default function Manager({world2, services}: ManaProps){
-    
-    
-        const [showManager, setShow] = useState(false);
-    
+      
     return (
-        <div> {showManager &&
-            < div className="modal">
+
+            < div className="manager">
             <div>
               <h1 className="title">Managers make you feel better !</h1>
             </div>
@@ -36,13 +33,15 @@ import { World } from './world';
                         <button disabled={world2.money < manager.seuil}> Hire! </button>
     
                       </div>
-                    </div>
-                  ))}
+                    </div>  
+                  )
+                  )}
               </div>
-              <button onClick={() => setShow(false)}>Close</button>
+              {/* <button onClick={() => fermer()}className="closebutton" >Fermer</button> */}
             </div>
           </div>
-    }
-    </div>
+   
         )
-    } 
+      }
+    
+    
