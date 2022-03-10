@@ -5,7 +5,7 @@ import { Services } from "./Services";
 import { World } from './world';
 import ProductComponent from './Product'
 import { transform } from "./utils";
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 import Manager from "./managers";
 
 function App() {
