@@ -6,7 +6,7 @@ import { World } from './world';
 import ProductComponent from './Product'
 import { transform } from "./utils";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Manager from "./managers";
 
 function App() {
   const [services, setServices] = useState(new Services(""))
@@ -21,11 +21,13 @@ function App() {
 
   }, [])
 
+ 
   const [showManager, setShow] = useState(false);
+    
+  function fonction(){
+    setShow(true);
+  }
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  
   return (
 
     <div className="App">
@@ -42,7 +44,7 @@ function App() {
       </div>
       <div className="main">
         <div> liste des boutons de menu </div>
-      
+        
         <div className="product">
           <div> <ProductComponent prod={world.products.product[0]} services={services} /> </div>
           <div> <ProductComponent prod={world.products.product[1]} services={services} /> </div>
@@ -53,37 +55,11 @@ function App() {
           </div>
           </div>
           
-          <ul className="listbtn">
-          <button onClick={() => handleShow()}><i className="btnManagers"></i>Managers</button></ul>
-          <div> {showManager &&
-        < div className="modal">
-        <div>
-          <h1 className="title">Managers make you feel better !</h1>
-        </div>
-        <div>
-          <div>
-            {world.managers.pallier.filter(manager => !manager.unlocked).map(
-              manager => (
-                <div key={manager.idcible} className="managergrid">
-                  <div className="logoGrid" id="managerLogo">
-                    <img alt="manager logo" className="round" src={services.server + manager.logo} />
-                  </div>
-                  <div className="infosGrid" id="infosManagers">
-                    <div> {manager.name} </div>
-                    <div> {world.products.product[manager.idcible - 1].name}</div>
-                    <div className="seuilGrid" id="managerSeuil"> {manager.seuil} </div>
-                  </div>
-                  <div id="closebutton">
-                    <button disabled={world.money < manager.seuil}> Hire! </button>
-                    
-                  </div>
-                </div>
-              ))}
+          <div className="listbtn">
+          <button onClick={() => fonction()}><i className="btnManagers"></i>Managers</button>
+          <div> <Manager world2 = {world} services = {services}/> </div>
           </div>
-          <button onClick={() => setShow(false)}>Close</button>
-        </div>
-      </div>
-                     } </div>
+         
 
                      </div> );
     }
