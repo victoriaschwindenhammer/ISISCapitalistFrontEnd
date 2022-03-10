@@ -20,14 +20,13 @@ function App() {
     )
 
   }, [])
-  //je sais pas pq le titre est en deux fois...
   return (
 
     <div className="App">
       <div className="header">
-        <div><img src={services.server + world.logo} /></div>
+        <div ><img className="round" src={services.server + world.logo} /></div>
         <div className="titre">
-          {world.name}
+        {world.name}
         </div>
         <ul className="listeHeader">
           <li>{services.user}</li>
@@ -37,13 +36,13 @@ function App() {
       </div>
       <div className="main">
         <div> liste des boutons de menu </div>
-        <div className="product">
+        <div className="products">
           <div> <ProductComponent prod={world.products.product[0]} services={services} /> </div>
           <div> <ProductComponent prod={world.products.product[1]} services={services} /> </div>
-          <div> 3 </div>
-          <div> 4 </div>
-          <div> 5 </div>
-          <div> 6 </div>
+          <div> <ProductComponent prod={world.products.product[2]} services={services} /> </div>
+          <div> <ProductComponent prod={world.products.product[3]} services={services} /> </div>
+          <div> <ProductComponent prod={world.products.product[4]} services={services} /> </div>
+          <div> <ProductComponent prod={world.products.product[5]} services={services} /> </div>
         </div>
       </div>
     </div>
