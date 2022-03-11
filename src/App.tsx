@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Services } from "./Services";
-import { World } from './world';
+import { World, Product} from './world';
 import ProductComponent from './Product'
 import { transform } from "./utils";
 //import 'bootstrap/dist/css/bootstrap.min.css';
@@ -40,22 +40,22 @@ function App() {
  setUsername(username)
 }, [])
 
-
-/*   useEffect(() => {
-    let services = new Services("")
-    setServices(services)
-    services.getWorld().then(response => {
-      setWorld(response.data)
-    }
-    )
-
-  }, []) */
-
   const [showManager, setShow] = useState(false);
 
   function afficher() {
     setShow(true);
   }
+
+  function onProductionDone(p: Product): void {
+    // calcul de la somme obtenue par la production du produit
+    let gain = p.revenu
+    // ajout de la somme à l’argent possédé
+    addToScore(gain)
+
+    function addToScore(g : number){
+      world.score= world.score + g;
+    }
+   }
 
   return (
     <div className="App">
@@ -68,6 +68,7 @@ function App() {
           <li>{services.user}</li>
           <li>Score : {world.score}</li>
           <li>Money : <span dangerouslySetInnerHTML={{ __html: transform(world.money) }} /> $</li>
+          <li><button ><i className="multiplicateur"></i>Buy x 1</button></li>
         </div>
       </div>
       <label> Choisis ton pseudo :
@@ -81,12 +82,12 @@ function App() {
             </div> </li>
         </ul>
         <div className="products">
-          <div> <ProductComponent prod={world.products.product[0]} services={services} /> </div>
-          <div> <ProductComponent prod={world.products.product[1]} services={services} /> </div>
-          <div> <ProductComponent prod={world.products.product[2]} services={services} /> </div>
-          <div> <ProductComponent prod={world.products.product[3]} services={services} /> </div>
-          <div> <ProductComponent prod={world.products.product[4]} services={services} /> </div>
-          <div> <ProductComponent prod={world.products.product[5]} services={services} /> </div>
+          <div> <ProductComponent prod={world.products.product[0]} onProductionDone={onProductionDone} services={services} /> </div>
+          <div> <ProductComponent prod={world.products.product[1]} onProductionDone={onProductionDone} services={services} /> </div>
+          <div> <ProductComponent prod={world.products.product[2]} onProductionDone={onProductionDone} services={services} /> </div>
+          <div> <ProductComponent prod={world.products.product[3]} onProductionDone={onProductionDone} services={services} /> </div>
+          <div> <ProductComponent prod={world.products.product[4]} onProductionDone={onProductionDone} services={services} /> </div>
+          <div> <ProductComponent prod={world.products.product[5]} onProductionDone={onProductionDone} services={services} /> </div>
         </div>
       </div>
       <div className="listbtn">

@@ -5,14 +5,14 @@ import { Product } from "./world";
 
 type ProductProps = {
     prod: Product
+    onProductionDone: (product: Product) => void;
     services: Services
 }
-export default function ProductComponent({ prod, services }: ProductProps) {
+export default function ProductComponent({ prod, onProductionDone, services }: ProductProps) {
     const [progress, setProgress] = useState(0)
-    const [lastupdate, setLastupdate] = useState(Date.now())
-    //var lastupdate = Date.now();
+    const [lastupdate, setLastupdate] = useState(0)
 
-/*      const savedCallback = useRef(calcScore)
+    const savedCallback = useRef(calcScore)
     useEffect(() => savedCallback.current = calcScore)
     useEffect(() => {
         let timer = setInterval(() => savedCallback.current(), 100)
@@ -21,33 +21,38 @@ export default function ProductComponent({ prod, services }: ProductProps) {
         }
     }, [])
 
-
-    function startFabrication(p: Product) {
-        p.timeleft = p.vitesse
-        //setProgress(50);
-
-    }
     function calcScore() {
-        if (prod.timeleft == 0) { }
+        if (prod == null) { }
         else {
-            prod.timeleft = ((Date.now()) - lastupdate) - prod.timeleft;
+            if (prod.timeleft == 0) { }
+            else {
+                prod.timeleft = prod.timeleft-((Date.now()) - lastupdate);
 
-            if (prod.timeleft <= 0) {
-                if (prod.timeleft < 0) {
-                    prod.timeleft = 0;
+                if (prod.timeleft <= 0) {
+                    if (prod.timeleft < 0) {
+                        prod.timeleft = 0;
+                    }
+                    else {
+                        
+                        // code de rajout de l'argent
+                        setProgress(0)
+                    }
+                    onProductionDone(prod)
                 }
                 else {
-                    // code de rajout de l'argent
-                    setProgress(0)
-                }
-            }
-            else {
-                setProgress(((prod.vitesse - prod.timeleft) / prod.timeleft) * 100);
+                    setProgress(((prod.vitesse - prod.timeleft) / prod.timeleft) * 100);
 
+                }
             }
         }
 
-    }   */
+    }
+    function startFabrication() {
+        prod.timeleft = prod.vitesse;
+        setLastupdate(Date.now());
+
+    }
+    
     if (prod == null) {
         return (
             <div>...</div>
@@ -56,7 +61,7 @@ export default function ProductComponent({ prod, services }: ProductProps) {
     else {
         return (<div className="product">
             <div className="lesdeux">
-                <div className="logo"/*  onClick={() => startFabrication(prod)}  */ ><img className="round" src={services.server + prod.logo} /></div>
+                <div className="logo" onClick={() => startFabrication()} ><img className="round" src={services.server + prod.logo} /></div>
                 <div className="quantite">{prod.quantite}</div>
             </div>
 
@@ -76,7 +81,6 @@ export default function ProductComponent({ prod, services }: ProductProps) {
         </div>
         )
     }
-    
+
 
 }
-    
