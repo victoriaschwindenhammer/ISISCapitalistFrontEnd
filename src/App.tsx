@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Services } from "./Services";
-import { World, Product} from './world';
+import { World, Product } from './world';
 import ProductComponent from './Product'
 import { transform } from "./utils";
 //import 'bootstrap/dist/css/bootstrap.min.css';
@@ -19,43 +19,51 @@ function App() {
   }
 
   useEffect(() => {
- if (username !== "") {
- let services = new Services(username)
- setServices(services)
- services.getWorld().then(response => {
- //let liste = compute_unlocks_list(response.data)
- setWorld(response.data)
- //setUnlockList(liste)
- }
- )
- }
-}, [username])
+    if (username !== "") {
+      let services = new Services(username)
+      setServices(services)
+      services.getWorld().then(response => {
+        //let liste = compute_unlocks_list(response.data)
+        setWorld(response.data)
+        //setUnlockList(liste)
+      }
+      )
+    }
+  }, [username])
   useEffect(() => {
- let username = localStorage.getItem("username");
- // si pas de username, on génère un username aléatoire
- if (!username || username === "") {
- username = "Linguini" + Math.floor(Math.random() * 10000);
- }
- localStorage.setItem("username", username);
- setUsername(username)
-}, [])
+    let username = localStorage.getItem("username");
+    // si pas de username, on génère un username aléatoire
+    if (!username || username === "") {
+      username = "Linguini" + Math.floor(Math.random() * 10000);
+    }
+    localStorage.setItem("username", username);
+    setUsername(username)
+  }, [])
 
   const [showManager, setShow] = useState(false);
 
   function afficher() {
-    setShow(true);
+    if (showManager == true) {
+      setShow(false)
+    }
+    else {
+      setShow(true)
+    };
   }
 
   function onProductionDone(p: Product): void {
     // calcul de la somme obtenue par la production du produit
-    let gain = p.revenu
+    let gain = p.revenu;
     // ajout de la somme à l’argent possédé
     addToScore(gain)
 
-    function addToScore(g : number){
-      world.score= world.score + g;
-    }
-   }
+  }
+
+  function addToScore(g: number) {
+    world.money = world.money + g;
+    world.score = world.score + g;
+
+  }
 
   return (
     <div className="App">

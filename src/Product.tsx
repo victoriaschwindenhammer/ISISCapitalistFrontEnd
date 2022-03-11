@@ -8,9 +8,11 @@ type ProductProps = {
     onProductionDone: (product: Product) => void;
     services: Services
 }
+
+
 export default function ProductComponent({ prod, onProductionDone, services }: ProductProps) {
     const [progress, setProgress] = useState(0)
-    const [lastupdate, setLastupdate] = useState(0)
+    let lastupdate = Date.now();
 
     const savedCallback = useRef(calcScore)
     useEffect(() => savedCallback.current = calcScore)
@@ -21,23 +23,26 @@ export default function ProductComponent({ prod, onProductionDone, services }: P
         }
     }, [])
 
+    function startFabrication() {
+        prod.timeleft = prod.vitesse;
+        lastupdate=Date.now();
+        setProgress(0);
+
+    }
     function calcScore() {
         if (prod == null) { }
         else {
             if (prod.timeleft == 0) { }
             else {
-                prod.timeleft = prod.timeleft-((Date.now()) - lastupdate);
-
+                let now=Date.now();
+                let elapsetime=now - lastupdate;
+                prod.timeleft = prod.timeleft-elapsetime;
+                lastupdate=now;
                 if (prod.timeleft <= 0) {
-                    if (prod.timeleft < 0) {
-                        prod.timeleft = 0;
-                    }
-                    else {
-                        
+                    prod.timeleft = 0; 
                         // code de rajout de l'argent
-                        setProgress(0)
-                    }
-                    onProductionDone(prod)
+                        setProgress(0);
+                        onProductionDone(prod);
                 }
                 else {
                     setProgress(((prod.vitesse - prod.timeleft) / prod.timeleft) * 100);
@@ -47,11 +52,7 @@ export default function ProductComponent({ prod, onProductionDone, services }: P
         }
 
     }
-    function startFabrication() {
-        prod.timeleft = prod.vitesse;
-        setLastupdate(Date.now());
 
-    }
     
     if (prod == null) {
         return (
