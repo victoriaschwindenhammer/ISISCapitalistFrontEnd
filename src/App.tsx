@@ -11,7 +11,37 @@ import Manager from "./managers";
 function App() {
   const [services, setServices] = useState(new Services(""))
   const [world, setWorld] = useState(new World())
+  const [username, setUsername] = useState("");
+
+  const onUserNameChanged = (e: any) => {
+    setUsername(e.target.value);
+    localStorage.setItem("username", e.target.value);
+  }
+
   useEffect(() => {
+ if (username !== "") {
+ let services = new Services(username)
+ setServices(services)
+ services.getWorld().then(response => {
+ //let liste = compute_unlocks_list(response.data)
+ setWorld(response.data)
+ //setUnlockList(liste)
+ }
+ )
+ }
+}, [username])
+  useEffect(() => {
+ let username = localStorage.getItem("username");
+ // si pas de username, on génère un username aléatoire
+ if (!username || username === "") {
+ username = "Linguini" + Math.floor(Math.random() * 10000);
+ }
+ localStorage.setItem("username", username);
+ setUsername(username)
+}, [])
+
+
+/*   useEffect(() => {
     let services = new Services("")
     setServices(services)
     services.getWorld().then(response => {
@@ -19,7 +49,7 @@ function App() {
     }
     )
 
-  }, [])
+  }, []) */
 
   const [showManager, setShow] = useState(false);
 
@@ -40,6 +70,8 @@ function App() {
           <li>Money : <span dangerouslySetInnerHTML={{ __html: transform(world.money) }} /> $</li>
         </div>
       </div>
+      <label> Choisis ton pseudo :
+        <input type="text" value={username} onChange={onUserNameChanged} id="inputUsername" /></label>
       <div className="main">
         <ul>
           <li><button onClick={() => afficher()}><i className="btnManagers"></i>Managers </button>

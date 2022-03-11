@@ -12,7 +12,7 @@ export default function ProductComponent({ prod, services }: ProductProps) {
     const [lastupdate, setLastupdate] = useState(Date.now())
     //var lastupdate = Date.now();
 
-    const savedCallback = useRef(calcScore)
+/*      const savedCallback = useRef(calcScore)
     useEffect(() => savedCallback.current = calcScore)
     useEffect(() => {
         let timer = setInterval(() => savedCallback.current(), 100)
@@ -28,7 +28,7 @@ export default function ProductComponent({ prod, services }: ProductProps) {
 
     }
     function calcScore() {
-        if (prod.timeleft = 0) { }
+        if (prod.timeleft == 0) { }
         else {
             prod.timeleft = ((Date.now()) - lastupdate) - prod.timeleft;
 
@@ -47,9 +47,7 @@ export default function ProductComponent({ prod, services }: ProductProps) {
             }
         }
 
-    }
-
-
+    }   */
     if (prod == null) {
         return (
             <div>...</div>
@@ -58,7 +56,7 @@ export default function ProductComponent({ prod, services }: ProductProps) {
     else {
         return (<div className="product">
             <div className="lesdeux">
-                <div className="logo" onClick={() => startFabrication(prod)}><img className="round" src={services.server + prod.logo} /></div>
+                <div className="logo"/*  onClick={() => startFabrication(prod)}  */ ><img className="round" src={services.server + prod.logo} /></div>
                 <div className="quantite">{prod.quantite}</div>
             </div>
 
@@ -78,11 +76,7 @@ export default function ProductComponent({ prod, services }: ProductProps) {
         </div>
         )
     }
-
-
-
-
-
-
+    
 
 }
+    
