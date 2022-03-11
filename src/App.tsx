@@ -90,12 +90,12 @@ function App() {
             </div> </li>
         </ul>
         <div className="products">
-          <div> <ProductComponent prod={world.products.product[0]} onProductionDone={onProductionDone} services={services} /> </div>
-          <div> <ProductComponent prod={world.products.product[1]} onProductionDone={onProductionDone} services={services} /> </div>
-          <div> <ProductComponent prod={world.products.product[2]} onProductionDone={onProductionDone} services={services} /> </div>
-          <div> <ProductComponent prod={world.products.product[3]} onProductionDone={onProductionDone} services={services} /> </div>
-          <div> <ProductComponent prod={world.products.product[4]} onProductionDone={onProductionDone} services={services} /> </div>
-          <div> <ProductComponent prod={world.products.product[5]} onProductionDone={onProductionDone} services={services} /> </div>
+          <div> <ProductComponent prod={world.products.product[0]} onProductionDone={onProductionDone} services={services} world={world}/> </div>
+          <div> <ProductComponent prod={world.products.product[1]} onProductionDone={onProductionDone} services={services} world={world}/> </div>
+          <div> <ProductComponent prod={world.products.product[2]} onProductionDone={onProductionDone} services={services} world={world}/> </div>
+          <div> <ProductComponent prod={world.products.product[3]} onProductionDone={onProductionDone} services={services} world={world}/> </div>
+          <div> <ProductComponent prod={world.products.product[4]} onProductionDone={onProductionDone} services={services} world={world}/> </div>
+          <div> <ProductComponent prod={world.products.product[5]} onProductionDone={onProductionDone} services={services} world={world}/> </div>
         </div>
       </div>
       <div className="listbtn">

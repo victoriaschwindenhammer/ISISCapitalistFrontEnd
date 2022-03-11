@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Services } from "./Services";
-import { Pallier, World } from './world';
+import { Pallier, World,Product } from './world';
+import startFabrication from './Product';
 
     type ManaProps ={
         world2: World
@@ -12,13 +13,12 @@ import { Pallier, World } from './world';
     export default function Manager({world2, services}: ManaProps){
       
     function engagerManager(m: Pallier) {
-        if(world2.money < m.seuil){
+        if(world2.money >= m.seuil){
           world2.money= world2.money-m.seuil;
           m.unlocked= true;
           world2.products.product[m.idcible - 1].managerUnlocked=true;
-
-
         }
+        else {}
 
     } 
 
@@ -41,14 +41,12 @@ import { Pallier, World } from './world';
                         <div className="seuilGrid" id="managerSeuil"> {manager.seuil} </div>
                       </div>
                       <div id="closebutton">
-                        <button onClick={() => engagerManager(manager)}  disabled={world2.money < manager.seuil}> Hire! </button>
-    
+                        <button onClick={() => engagerManager(manager)} disabled={world2.money < manager.seuil}> Hire! </button>
                       </div>
                     </div>  
                   )
                   )}
               </div>
-              {/* <button onClick={() => fermer()}className="closebutton" >Fermer</button> */}
             </div>
           </div>
    
