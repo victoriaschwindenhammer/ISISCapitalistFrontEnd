@@ -26,7 +26,7 @@ import startFabrication from './Product';
 
             < div className="manager">
             <div>
-              <h1 className="title">Managers make you feel better !</h1>
+              <h1 className="title">Chacun son travail ! Engages un de nos managers pour te faciliter la vie : </h1>
             </div>
             <div>
               <div>
@@ -38,10 +38,10 @@ import startFabrication from './Product';
                       <div className="infosGrid" id="infosManagers">
                         <div> {manager.name} </div>
                         <div> {world2.products.product[manager.idcible - 1].name}</div>
-                        <div className="seuilGrid" id="managerSeuil"> {manager.seuil} </div>
+                        <div className="seuilGrid" id="managerSeuil"> {manager.seuil} € </div>
                       </div>
                       <div id="closebutton">
-                        <button onClick={() => engagerManager(manager)} disabled={world2.money < manager.seuil}> Hire! </button>
+                        <button onClick={() => engagerManager(manager)} disabled={world2.money < manager.seuil}> Engager ! </button>
                       </div>
                     </div>  
                   )

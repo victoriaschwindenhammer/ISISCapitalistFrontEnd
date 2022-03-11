@@ -38,7 +38,10 @@ export default function ProductComponent({ prod, onProductionDone, services, wor
         else {
             if (prod.timeleft == 0) {
              }
-            if((prod.timeleft == 0 && prod.managerUnlocked==true ) || prod.timeleft!=0) {
+            if(prod.timeleft == 0 && prod.managerUnlocked==true ) {
+                startFabrication(prod);
+            }
+            if (prod.timeleft != 0){
                 let now=Date.now();
                 let elapsetime=now - lastupdate;
                 prod.timeleft = prod.timeleft-elapsetime;
@@ -54,11 +57,12 @@ export default function ProductComponent({ prod, onProductionDone, services, wor
                 }
             }
         }
-
     }
 
+    
+
     function acheterProduit(p:Product){
-        if (world.money > p.cout) {
+        if (world.money >= p.cout) {
             let cout = p.cout;
             world.money =world.money - cout;
             p.quantite = p.quantite + 1;
@@ -85,10 +89,10 @@ export default function ProductComponent({ prod, onProductionDone, services, wor
                         <ProgressBar transitionDuration={"0.1s"} customLabel={" "}
                             completed={progress} />
                     </div>
-                    <div className="revenu">Rapporte : {prod.revenu} $</div>
+                    <div className="revenu">Rapporte : {prod.revenu*prod.quantite} € </div>
                 </div>
                 <div className="productlignebas">
-                    <div><button onClick={() => acheterProduit(prod)} disabled={world.money < prod.cout}>Acheter pour : {prod.cout} $ </button></div>
+                    <div><button onClick={() => acheterProduit(prod)} disabled={world.money < prod.cout}>Acheter pour : {prod.cout} € </button></div>
                     <div>Temps restant : {prod.timeleft}s</div>
                 </div>
             </div>

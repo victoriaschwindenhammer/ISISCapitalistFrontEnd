@@ -8,7 +8,9 @@ import { transform } from "./utils";
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import Manager from "./managers";
 
+
 function App() {
+  
   const [services, setServices] = useState(new Services(""))
   const [world, setWorld] = useState(new World())
   const [username, setUsername] = useState("");
@@ -53,15 +55,16 @@ function App() {
 
   function onProductionDone(p: Product): void {
     // calcul de la somme obtenue par la production du produit
-    let gain = p.revenu;
+    let gain = p.revenu *p.quantite;
     // ajout de la somme à l’argent possédé
     addToScore(gain)
 
   }
 
   function addToScore(g: number) {
-    world.money = world.money + g;
-    world.score = world.score + g;
+    setWorld(world=>({...world,money:world.money + g, score : world.score+g}))
+    //world.money = world.money + g;
+    //world.score = world.score + g;
 
   }
 
@@ -74,9 +77,9 @@ function App() {
         </div>
         <div className="listeHeader">
           <li>{services.user}</li>
-          <li>Score : {world.score}</li>
-          <li>Money : <span dangerouslySetInnerHTML={{ __html: transform(world.money) }} /> $</li>
-          <li><button ><i className="multiplicateur"></i>Buy x 1</button></li>
+          <li>Score : <span dangerouslySetInnerHTML={{ __html: transform(world.score) }} /> €</li>
+          <li>Argent : <span dangerouslySetInnerHTML={{ __html: transform(world.money) }} /> €</li>
+          <li><button ><i className="multiplicateur"></i>Acheter x 1</button></li>
         </div>
       </div>
       <label> Choisis ton pseudo :
@@ -104,6 +107,8 @@ function App() {
       </div>
     </div>
   );
+
+
 }
 export default App;
 
