@@ -11,10 +11,15 @@ import Unlock from "./unlocks";
 import Cashupgrade from "./cashupgrades";
 
 
+
 function App() {
   
   const [services, setServices] = useState(new Services(""))
   const [world, setWorld] = useState(new World())
+  let [qtmulti, setQtmulti] = useState(1);
+  let [value, setValue] = useState('Acheter 1');
+  let [count, setCount] = useState(0);
+  
   //const [product, setProduct] = useState(new Product())
   const [username, setUsername] = useState("");
 
@@ -88,6 +93,33 @@ function App() {
 
   }
 
+  
+  function multiplicateur() {
+    if (qtmulti == 1){
+            setValue('Acheter 10');
+            setQtmulti(10);
+            setCount(count + 1);
+          }else 
+          if (qtmulti == 10 ){
+            setValue('Acheter 100');
+            setQtmulti(100);
+            setCount(count + 1);
+          }else
+          if (qtmulti == 100){
+            setValue('Acheter max');
+            setQtmulti(1000000);
+            setCount(count + 1);
+          }else 
+          if (qtmulti == 1000000){
+            setValue('Acheter 1');
+            setQtmulti(1);
+            setCount(0);
+            
+        }
+      }
+     
+      
+      
   return (
     <div className="App">
       <div className="header">
@@ -98,18 +130,21 @@ function App() {
         <div className="listeHeader">
           <li>{services.user}</li>
           <li>Score : <span dangerouslySetInnerHTML={{ __html: transform(world.score) }} /> €</li>
-          <li>Argent : <span dangerouslySetInnerHTML={{ __html: transform(world.money) }} /> €</li>
-          <li><button ><i className="multiplicateur"></i>Acheter x 1</button></li>
+          <li>Coins : <span dangerouslySetInnerHTML={{ __html: transform(world.money) }} /> €</li>
+          <div> Multiplicateur :<button onClick={multiplicateur}> {qtmulti} </button>
+      </div>
         </div>
       </div>
       <label> Choisis ton pseudo :
         <input type="text" value={username} onChange={onUserNameChanged} id="inputUsername" /></label>
       <div className="main">
         <ul>
-          <li><button onClick={() => afficherManager()}><i className="btnManagers"></i>Managers </button>
+         <div className="listbtn"> 
+          <li className="btnManagers"> <button onClick={() => afficherManager()}>Managers </button>
             <div> {showManager &&
               <div className="modal"> <Manager world={world} services={services} /> </div>
             }
+            
             </div> </li>
             <li><button onClick={() => afficherUnlock()}><i className="btnUnlocks"></i>Unlocks </button>
             <div> {showUnlock&&
@@ -123,20 +158,18 @@ function App() {
       
             }
             </div> </li>
+            </div> 
         </ul>
         <div className="products">
-          <div> <ProductComponent prod={world.products.product[0]} onProductionDone={onProductionDone} services={services} world={world}/> </div>
-          <div> <ProductComponent prod={world.products.product[1]} onProductionDone={onProductionDone} services={services} world={world}/> </div>
-          <div> <ProductComponent prod={world.products.product[2]} onProductionDone={onProductionDone} services={services} world={world}/> </div>
-          <div> <ProductComponent prod={world.products.product[3]} onProductionDone={onProductionDone} services={services} world={world}/> </div>
-          <div> <ProductComponent prod={world.products.product[4]} onProductionDone={onProductionDone} services={services} world={world}/> </div>
-          <div> <ProductComponent prod={world.products.product[5]} onProductionDone={onProductionDone} services={services} world={world}/> </div>
+          <div> <ProductComponent prod={world.products.product[0]} onProductionDone={onProductionDone} qtmulti={qtmulti} money={world.money} services={services} world={world}/> </div>
+          <div> <ProductComponent prod={world.products.product[1]} onProductionDone={onProductionDone} qtmulti={qtmulti} money={world.money} services={services} world={world}/> </div>
+          <div> <ProductComponent prod={world.products.product[2]} onProductionDone={onProductionDone} qtmulti={qtmulti} money={world.money} services={services} world={world}/> </div>
+          <div> <ProductComponent prod={world.products.product[3]} onProductionDone={onProductionDone} qtmulti={qtmulti} money={world.money} services={services} world={world}/> </div>
+          <div> <ProductComponent prod={world.products.product[4]} onProductionDone={onProductionDone} qtmulti={qtmulti} money={world.money} services={services} world={world}/> </div>
+          <div> <ProductComponent prod={world.products.product[5]} onProductionDone={onProductionDone} qtmulti={qtmulti} money={world.money} services={services} world={world}/> </div>
         </div>
       </div>
-      <div className="listbtn">
-
-
-      </div>
+      
     </div>
   );
 

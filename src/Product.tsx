@@ -3,18 +3,22 @@ import ProgressBar from "./ProgressBar";
 import { Services } from "./Services";
 import Unlock from './unlocks';
 import { Product, World, Pallier } from "./world";
+import './Product.css';
 
 type ProductProps = {
     prod: Product
     onProductionDone: (product: Product) => void;
     services: Services
     world: World;
+    qtmulti : number;
+    money : number;
 }
 
 
-export default function ProductComponent({ prod, onProductionDone, services, world }: ProductProps) {
+export default function ProductComponent({ prod, onProductionDone,qtmulti, services, world }: ProductProps) {
     const [progress, setProgress] = useState(0)
     let lastupdate = Date.now();
+   
 
     const savedCallback = useRef(calcScore)
     useEffect(() => savedCallback.current = calcScore)
@@ -31,7 +35,8 @@ export default function ProductComponent({ prod, onProductionDone, services, wor
             lastupdate = Date.now();
             setProgress(0);
         }
-        else { }
+        calcMaxCanBuy();
+    
 
     }
     function calcScore() {
@@ -114,6 +119,24 @@ export default function ProductComponent({ prod, onProductionDone, services, wor
                 <div>...</div>
             )
         }
+
+        let prix = Math.round(prod.cout*((Math.pow(prod.croissance,qtmulti)-1)/(prod.croissance-1)));
+        
+
+         // u0(1-c^n)/(1-c) < world.money dc n =
+    function calcMaxCanBuy(){
+        let n = Math.log(1+World.money*(prod.croissance-1)/prod.cout)/(Math.log(prod.croissance))
+        
+        return n;
+    }
+        
+    if (prod == null){
+        return(
+            <div></div>
+        )
+    }
+
+    
         else {
             return (<div className="product">
                 <div className="lesdeux">
@@ -127,10 +150,12 @@ export default function ProductComponent({ prod, onProductionDone, services, wor
                             <ProgressBar transitionDuration={"0.1s"} customLabel={" "}
                                 completed={progress} />
                         </div>
+                        
+            
                         <div className="revenu">Rapporte : {prod.revenu * prod.quantite} € </div>
                     </div>
                     <div className="productlignebas">
-                        <div><button onClick={() => acheterProduit(prod)} disabled={world.money < prod.cout}>Acheter pour : {prod.cout} € </button></div>
+                        <div><button onClick={() => acheterProduit(prod)} disabled={world.money < prod.cout}>Prix: {prix}  € </button></div>
                         <div>Temps restant : {prod.timeleft}s</div>
                     </div>
                 </div>

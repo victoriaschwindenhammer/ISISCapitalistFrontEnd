@@ -1,6 +1,7 @@
 .App {
   text-align: center;
-  position:relative;
+  position:fixed;
+  width:100%;
 }
 
 .App-logo {
@@ -15,11 +16,22 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+body::before{
+  content:"";
+  background-image: url("../public/bg.png");
+  background-repeat: no-repeat;
+  background-size:cover;
+  position:absolute;
+  opacity: 0.75;
+  top:0px;
+  bottom:0px;
+  left:0px;
+  right:0px;
 
-
+}
 
 .App-header {
-  background-color: #282c34;
+
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -117,4 +129,8 @@
     left:20%; /* a 20% de la gauche */
    }
 
-
+  
+  
+   
+  
+   

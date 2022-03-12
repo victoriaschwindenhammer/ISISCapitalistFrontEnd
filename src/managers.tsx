@@ -4,6 +4,8 @@ import './App.css';
 import { Services } from "./Services";
 import { Pallier, World,Product } from './world';
 import startFabrication from './Product';
+import { badgeClasses, Snackbar } from '@mui/material';
+
 
     type ManaProps ={
         world: World
@@ -12,6 +14,7 @@ import startFabrication from './Product';
     
     export default function Manager({world, services}: ManaProps){
       
+
     function engagerManager(m: Pallier) {
         if(world.money >= m.seuil){
           world.money= world.money-m.seuil;
@@ -21,7 +24,7 @@ import startFabrication from './Product';
         else {}
 
     } 
-
+   
     return (
             < div className="manager">
             <div>
@@ -39,6 +42,7 @@ import startFabrication from './Product';
                         <div> {world.products.product[manager.idcible - 1].name}</div>
                         <div className="seuilGrid" id="managerSeuil"> {manager.seuil} € </div>
                       </div>
+                      
                       <div id="closebutton">
                         <button onClick={() => engagerManager(manager)} disabled={world.money < manager.seuil}> Engager ! </button>
                       </div>
