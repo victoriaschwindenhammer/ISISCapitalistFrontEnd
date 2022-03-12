@@ -7,12 +7,15 @@ import ProductComponent from './Product'
 import { transform } from "./utils";
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import Manager from "./managers";
+import Unlock from "./unlocks";
+import Cashupgrade from "./cashupgrades";
 
 
 function App() {
   
   const [services, setServices] = useState(new Services(""))
   const [world, setWorld] = useState(new World())
+  //const [product, setProduct] = useState(new Product())
   const [username, setUsername] = useState("");
 
   const onUserNameChanged = (e: any) => {
@@ -42,14 +45,33 @@ function App() {
     setUsername(username)
   }, [])
 
-  const [showManager, setShow] = useState(false);
-
-  function afficher() {
+  const [showManager, setShowManager] = useState(false);
+  const [showUnlock, setShowUnlock] = useState(false);
+  const [showCashupgrade, setShowCashupgrade] = useState(false);
+  function afficherManager() {
     if (showManager == true) {
-      setShow(false)
+      setShowManager(false)
     }
     else {
-      setShow(true)
+      setShowManager(true)
+    };
+  }
+
+  function afficherUnlock() {
+    if (showUnlock == true) {
+      setShowUnlock(false)
+    }
+    else {
+      setShowUnlock(true)
+    };
+  }
+
+  function afficherCashupgrade() {
+    if (showCashupgrade == true) {
+      setShowCashupgrade(false)
+    }
+    else {
+      setShowCashupgrade(true)
     };
   }
 
@@ -62,9 +84,7 @@ function App() {
   }
 
   function addToScore(g: number) {
-    setWorld(world=>({...world,money:world.money + g, score : world.score+g}))
-    //world.money = world.money + g;
-    //world.score = world.score + g;
+    setWorld(world=>({...world,money:world.money + g, score : world.score+g}));
 
   }
 
@@ -86,9 +106,21 @@ function App() {
         <input type="text" value={username} onChange={onUserNameChanged} id="inputUsername" /></label>
       <div className="main">
         <ul>
-          <li><button onClick={() => afficher()}><i className="btnManagers"></i>Managers </button>
+          <li><button onClick={() => afficherManager()}><i className="btnManagers"></i>Managers </button>
             <div> {showManager &&
-              <div className="modal"> <Manager world2={world} services={services} /> </div>
+              <div className="modal"> <Manager world={world} services={services} /> </div>
+            }
+            </div> </li>
+            <li><button onClick={() => afficherUnlock()}><i className="btnUnlocks"></i>Unlocks </button>
+            <div> {showUnlock&&
+              <div className="modal"> <Unlock world={world} prod={world.products.product[0]} services={services} /> </div>
+      
+            }
+            </div> </li>
+            <li> <button onClick={() => afficherCashupgrade()}><i className="btnUnlocks"></i>Cash upgrades </button>
+            <div> {showCashupgrade &&
+              <div className="modal"> <Cashupgrade world={world} services={services} /> </div>
+      
             }
             </div> </li>
         </ul>
