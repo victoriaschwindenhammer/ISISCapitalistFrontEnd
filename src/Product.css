@@ -6,20 +6,32 @@
  border-image:auto;
    background-repeat: no-repeat;
 }
-
+.lesdeux{
+    
+        
+        grid-template-columns: 7em 1fr 6em;
+        grid-template-rows : 1fr 1fr;
+        
+        border-radius: 300px;
+        vertical-align: middle;
+       
+     
+    
+}
 
 
 .quantite{
-    border-radius:30px; 
-    bottom: 1px;
-    text-align: center;
-    align-content: center;
+    border-radius:300px; 
+    bottom: -10px;
+    right: 140px;
+    border-color:black;
+    border : 2px solid none;
     
-    width:auto;
 }
 .temps{
-    position: right;
-    margin-left: 00px;
+    position: center;
+    margin-left: 200px;
+    
 }
 .revenu{
     padding-top:300px;

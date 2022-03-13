@@ -14,7 +14,7 @@ import {  World,Product } from './world';
 
             < div className="unlock">
             <div>
-              <h1 className="title">Unlocks </h1>
+              <h1 className="title">Maximise tes profits ! </h1>
             </div>
             <div>
               <div>  

@@ -157,7 +157,6 @@ export default function ProductComponent({ prod, onProductionDone, qtmulti, serv
                 <div className="logo" onClick={() => startFabrication(prod)} ><img className="round" src={services.server + prod.logo} /></div>
                 <div className="quantite">{prod.quantite}</div>
             </div>
-
             <div className="productcolonnedroite">
                 <div className="lesdeux">
                     <br></br>
@@ -165,8 +164,6 @@ export default function ProductComponent({ prod, onProductionDone, qtmulti, serv
                         <ProgressBar transitionDuration={"0.1s"} customLabel={" "}
                             completed={progress} />
                     </div>
-
-
                     <div className="revenu">Rapporte : {prod.revenu * prod.quantite} € </div>
                 </div>
                 <div className="productlignebas">

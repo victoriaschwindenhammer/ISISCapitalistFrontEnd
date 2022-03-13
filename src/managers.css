@@ -1,28 +1,32 @@
-
-
-.modal {
+.modal{
     position: fixed; /* reste en place */
-    z-index: 2; /* au dessus du reste */
-    width: 800px; /* largeur */
-    height: 800px; /* hauteur */
-    overflow: auto; /* barre de scroll si besoin */
-    background-color: white; /* opaque */
-    border: solid;
-    top:10; /* a 10% du haut */
-    left:20%; /* a 20% de la gauche */
+z-index: 2; /* au dessus du reste */
+width: 700px; /* largeur */
+height: 700px; /* hauteur */
+overflow-y: scroll; /* barre de scroll si besoin */
+background-color: white; /* opaque */
+border: solid;
+top: 2px; /* a 5% du haut */
+left:20%; /* a 20% de la gauche */
+background-image: url("../public/bg.png");
 }
+
+
 .title{
     text-align:center;
 }
 
-.managergrid{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-    grid-auto-rows: minmax(100px, auto);
-}
 
 .logoGrid{
     grid-column: 1 / 1;
     grid-row: 1;
 }
+.hirebutton{
+    background-position: center;
+    background-size:90%;
+    width: 80px;
+      height: 35px;
+      background-color: rgb(245 209 20) ;
+      background-repeat: no-repeat;
+      width:auto;
+  }
