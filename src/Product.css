@@ -1,47 +1,44 @@
-.lesdeux{
-    display:grid;
-    grid-template-columns: 7em 1fr 6em;
-    grid-template-rows : 1fr 1fr;
-    border : 3px solid red;
-    border-radius: 30px;
-    vertical-align: middle;
-    
-} 
-
-.round{
-    width:112px;
-    height: 120px;
-    margin-left:10px;
-}
 
 .logo{
-    position: relative;
-    grid-column:1;
-    grid-row: 1 / span 2;
+    background-image: url("../public/selectionbon.png");
+    background-position: center;
+ background-size:100%;
+ border-image:auto;
+   background-repeat: no-repeat;
+}
+.round{
+    color:aliceblue;
 }
 
+
 .quantite{
-    border-radius:30px;
-    
+    border-radius:30px; 
     bottom: 1px;
     text-align: center;
     align-content: center;
-    margin : 2 auto;
-    width:100%;
-    margin-left:10px;
+    
+    width:auto;
+}
+.temps{
+    position: right;
+    margin-left: 00px;
+}
+.revenu{
+    padding-top:300px;
 }
 
-
-.productlignebas{
-    align-self: center;
+.prix{
+   
+    background-position: center;
+    background-size:auto;
+    width: 80px;
+      height: 35px;
+      background-color: rgb(245 209 20) ;
+      background-repeat: no-repeat;
+      width:auto;
+   
 }
 
-.progressbar{
-    grid-column: 2  / span 2; 
-    grid-row: 2;
-    margin-left:20px;
-    margin-right:20px;
-}
 
 
 

@@ -9,6 +9,7 @@ import { transform } from "./utils";
 import Manager from "./managers";
 import Unlock from "./unlocks";
 import Cashupgrade from "./cashupgrades";
+import Badge from '@mui/material/Badge';
 
 
 
@@ -19,6 +20,8 @@ function App() {
   let [qtmulti, setQtmulti] = useState(1);
   let [value, setValue] = useState('Acheter 1');
   let [count, setCount] = useState(0);
+  let [BadgeMana, setBadgeMana] = useState(0);
+  
   
   //const [product, setProduct] = useState(new Product())
   const [username, setUsername] = useState("");
@@ -27,7 +30,8 @@ function App() {
     setUsername(e.target.value);
     localStorage.setItem("username", e.target.value);
   }
-
+  
+ 
   useEffect(() => {
     if (username !== "") {
       let services = new Services(username)
@@ -53,6 +57,29 @@ function App() {
   const [showManager, setShowManager] = useState(false);
   const [showUnlock, setShowUnlock] = useState(false);
   const [showCashupgrade, setShowCashupgrade] = useState(false);
+
+      
+  function Badges() {
+    if (world.money > world.managers.pallier[5].seuil) {
+      setBadgeMana(6);
+    }
+    else if (world.money > world.managers.pallier[4].seuil) {
+      setBadgeMana(5);
+    }
+    else if (world.money > world.managers.pallier[3].seuil) {
+      setBadgeMana(4);
+    }
+    else if (world.money > world.managers.pallier[2].seuil) {
+      setBadgeMana(3);
+    }
+    else if (world.money > world.managers.pallier[1].seuil) {
+      setBadgeMana(2);
+    }
+    else {
+      setBadgeMana(1);
+    }
+  }
+
   function afficherManager() {
     if (showManager == true) {
       setShowManager(false)
@@ -124,40 +151,45 @@ function App() {
     <div className="App">
       <div className="header">
         <div ><img className="round" src={services.server + world.logo} /></div>
-        <div className="titre">
-          {world.name}
-        </div>
+        <div> <img className="titre" src="../supermariocapitalist.png" />
+          
+        </div><ul>
         <div className="listeHeader">
-          <li>{services.user}</li>
-          <li>Score : <span dangerouslySetInnerHTML={{ __html: transform(world.score) }} /> €</li>
-          <li>Coins : <span dangerouslySetInnerHTML={{ __html: transform(world.money) }} /> €</li>
-          <div> Multiplicateur :<button onClick={multiplicateur}> {qtmulti} </button>
+          
+          {services.user}
+         <div> Score : <span dangerouslySetInnerHTML={{ __html: transform(world.score) }} /> €</div>
+         <div >Coins :  <span  dangerouslySetInnerHTML={{ __html: transform(world.money) }} />€</div>
+          <div> <button className="multi" onClick={multiplicateur}> x {qtmulti} </button>
       </div>
-        </div>
+        </div></ul>
       </div>
       <label> Choisis ton pseudo :
         <input type="text" value={username} onChange={onUserNameChanged} id="inputUsername" /></label>
       <div className="main">
         <ul>
          <div className="listbtn"> 
-          <li className="btnManagers"> <button onClick={() => afficherManager()}>Managers </button>
-            <div> {showManager &&
+          < div> <Badge badgeContent={Badges} color="primary"> <button className="btnmana" onClick={() => afficherManager()}></button></Badge> 
+          <div> 
+
+          </div> <div> {showManager &&
               <div className="modal"> <Manager world={world} services={services} /> </div>
             }
-            
-            </div> </li>
-            <li><button onClick={() => afficherUnlock()}><i className="btnUnlocks"></i>Unlocks </button>
+            </div>
+            </div> 
+            <br></br>
+          <button className="btnUnlocks" onClick={() => afficherUnlock()}> </button>
             <div> {showUnlock&&
               <div className="modal"> <Unlock world={world} prod={world.products.product[0]} services={services} /> </div>
       
             }
-            </div> </li>
-            <li> <button onClick={() => afficherCashupgrade()}><i className="btnUnlocks"></i>Cash upgrades </button>
+            <br></br>
+            </div>
+             <button className="btnupgrades" onClick={() => afficherCashupgrade()}></button>
             <div> {showCashupgrade &&
               <div className="modal"> <Cashupgrade world={world} services={services} /> </div>
       
             }
-            </div> </li>
+            </div> 
             </div> 
         </ul>
         <div className="products">

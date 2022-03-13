@@ -7,14 +7,14 @@ import startFabrication from './Product';
 import { badgeClasses, Snackbar } from '@mui/material';
 
 
+
     type ManaProps ={
         world: World
         services:Services
     }
     
     export default function Manager({world, services}: ManaProps){
-      
-
+  
     function engagerManager(m: Pallier) {
         if(world.money >= m.seuil){
           world.money= world.money-m.seuil;
