@@ -196,7 +196,7 @@ function App() {
       <div className="main">
         <ul>
           <div className="listbtn">
-            < div> <Badge badgeContent={Badges} color="primary"> <button className="btnmana" onClick={() => afficherManager()}></button></Badge>
+            < div> <Badge badgeContent={Badges} > <button className="btnmana" onClick={() => afficherManager()}></button></Badge>
               <div>
 
               </div> <div> {showManager &&
@@ -226,14 +226,14 @@ function App() {
             }
               <br></br>
             </div>
-            <button className="btnangelupgrades" onClick={() => afficherAngelupgrade()}>Angel Upgrades</button>
+            <button className="btnangelupgrades" onClick={() => afficherAngelupgrade()}></button>
             <div> {showAngelupgrade &&
               <div className="modal"> <Angelupgrade world={world} services={services} /> </div>
 
             }
               <br></br>
             </div>
-            <button className="btninvestor" onClick={() => afficherInvestor()}>Investors</button>
+            <button className="btninvestor" onClick={() => afficherInvestor()}></button>
             <div> {showInvestors &&
               <div className="modal"> <Investor world={world} services={services} /> </div>
 

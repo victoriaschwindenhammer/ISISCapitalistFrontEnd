@@ -39,7 +39,7 @@ export default function Cashupgrade({ world, services }: ManaProps) {
     return (
         < div className="cashupgrade">
             <div>
-                <h1 className="title">Cash Upgrades</h1>
+                <h1 className="title">Achete ces upgrades pour booster ton business ! </h1>
             </div>
             <div>
                 <div>
@@ -52,8 +52,8 @@ export default function Cashupgrade({ world, services }: ManaProps) {
                                 <div className="seuilGrid" id="cashupgradeSeuil"> {cashupgrade.seuil} €  </div>
                                 <div > {cashupgrade.typeratio} : x {cashupgrade.ratio}</div>
                             </div>
-                            <div id="closebutton">
-                                <button onClick={() => acheterCashupragde(cashupgrade)} disabled={world.money < cashupgrade.seuil}> Acheter ! </button>
+                            <div>
+                                <button className="acheterupgrade" onClick={() => acheterCashupragde(cashupgrade)} disabled={world.money < cashupgrade.seuil}> Acheter ! </button>
                             </div>
                         </div>
                     )

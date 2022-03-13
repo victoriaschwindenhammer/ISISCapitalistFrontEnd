@@ -1,4 +1,4 @@
-import './App.css';
+import './managers.css';
 import { Services } from "./Services";
 import { Pallier, World} from './world';
 
@@ -39,8 +39,8 @@ import { Pallier, World} from './world';
                         <div className="seuilGrid" id="managerSeuil"> {manager.seuil} € </div>
                       </div>
                       
-                      <div id="closebutton">
-                        <button onClick={() => engagerManager(manager)} disabled={world.money < manager.seuil}> Engager ! </button>
+                      <div>
+                        <button  className="hirebutton" onClick={() => engagerManager(manager)} disabled={world.money < manager.seuil}> Engager ! </button>
                       </div>
                     </div>  
                   )
