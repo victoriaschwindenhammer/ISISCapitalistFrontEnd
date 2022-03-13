@@ -10,15 +10,15 @@ type ProductProps = {
     onProductionDone: (product: Product) => void;
     services: Services
     world: World;
-    qtmulti : number;
-    money : number;
+    qtmulti: String;
+    money: number;
 }
 
 
-export default function ProductComponent({ prod, onProductionDone,qtmulti, services, world }: ProductProps) {
+export default function ProductComponent({ prod, onProductionDone, qtmulti, services, world }: ProductProps) {
     const [progress, setProgress] = useState(0)
     let lastupdate = Date.now();
-   
+
 
     const savedCallback = useRef(calcScore)
     useEffect(() => savedCallback.current = calcScore)
@@ -35,8 +35,8 @@ export default function ProductComponent({ prod, onProductionDone,qtmulti, servi
             lastupdate = Date.now();
             setProgress(0);
         }
-        calcMaxCanBuy();
-    
+        //calcMaxCanBuy();
+
 
     }
     function calcScore() {
@@ -68,101 +68,115 @@ export default function ProductComponent({ prod, onProductionDone,qtmulti, servi
 
 
     function acheterProduit(p: Product) {
-        if (world.money >= p.cout) {
-            let cout = p.cout;
-            world.money = world.money - cout;
-            p.quantite = p.quantite + 1;
-            p.cout = cout * p.croissance;
+        let max = Math.round(world.money / p.cout);
+        //let croissancetotale = 0 
+
+        if (Number(qtmulti) == 1 || Number(qtmulti) == 10 || Number(qtmulti) == 100) {
+            /* for (let i=0; i<Number(qtmulti);i++){
+            croissancetotale+=Math.pow(p.croissance,i);
+            } */
+            if (world.money >= p.cout * Number(qtmulti)) {
+                let cout = p.cout;
+                world.money = world.money - (cout * Number(qtmulti));
+                p.quantite = p.quantite + Number(qtmulti);
+                p.cout = cout * Math.pow(p.croissance, (Number(qtmulti)));
+            }
         }
+        if (qtmulti = 'MAX') {
+            if (world.money >= p.cout * max) {
+                let cout = p.cout;
+                world.money = world.money - (cout * max);
+                p.quantite = p.quantite + max;
+                p.cout = cout * Math.pow(p.croissance, max);
+            }
+        }
+
         for (let i = 0; i < p.palliers.pallier.length; i++) {
             if (p.id == p.palliers.pallier[i].idcible) {
                 if (p.palliers.pallier[i].unlocked == false) {
                     if (p.quantite >= p.palliers.pallier[i].seuil) {
                         p.palliers.pallier[i].unlocked = true;
                         if (p.palliers.pallier[i].typeratio = "gain") {
-                            p.revenu = p.revenu * p.palliers.pallier[i].ratio
+                            p.revenu = p.revenu * p.palliers.pallier[i].ratio;
+                        }
+                        if (p.palliers.pallier[i].typeratio = "vitesse") {
+                            p.vitesse = p.vitesse / p.palliers.pallier[i].ratio;
                         }
                     }
                 }
             }
         }
         for (let i = 0; i < world.allunlocks.pallier.length; i++) {
+            let count = 0
             if (world.allunlocks.pallier[i].unlocked == false) {
-            if (p.quantite == world.products.product[0].quantite) {
-                if (world.products.product[0].quantite == world.products.product[0].quantite) {
-                    if (world.products.product[1].quantite == world.products.product[2].quantite) {
-                        if (world.products.product[2].quantite == world.products.product[3].quantite) {
-                            if (world.products.product[3].quantite == world.products.product[4].quantite) {
-                                if (world.products.product[4].quantite == world.products.product[5].quantite) {
-                                    if (world.products.product[5].quantite == world.allunlocks.pallier[i].seuil) {
-                                        world.allunlocks.pallier[i].unlocked = true;
-                                        for (let j = 0; j < world.products.product.length; j++) {
-                                            if (world.allunlocks.pallier[i].typeratio = "gain") {
-                                                world.products.product[j].revenu = world.products.product[j].revenu * world.allunlocks.pallier[i].ratio;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                for (let k = 0; i < world.products.product.length; k++) {
+                    if (world.products.product[k].quantite == world.allunlocks.pallier[i].seuil) {
+                        count += 1;
+                    }
+                }
+                if (count == world.products.product.length) {
+                    world.allunlocks.pallier[i].unlocked = true;
+                    for (let j = 0; j < world.products.product.length; j++) {
+                        if (world.allunlocks.pallier[i].typeratio = "gain") {
+                            world.products.product[j].revenu = world.products.product[j].revenu * world.allunlocks.pallier[i].ratio;
+                        }
+                        if (world.allunlocks.pallier[i].typeratio = "vitesse") {
+                            world.products.product[j].vitesse = world.products.product[j].vitesse / world.allunlocks.pallier[i].ratio;
                         }
                     }
                 }
             }
-
         }
     }
-}
 
 
-        if (prod == null) {
-            return (
-                <div>...</div>
-            )
-        }
-
-        let prix = Math.round(prod.cout*((Math.pow(prod.croissance,qtmulti)-1)/(prod.croissance-1)));
-        
-
-         // u0(1-c^n)/(1-c) < world.money dc n =
-    function calcMaxCanBuy(){
-        let n = Math.log(1+World.money*(prod.croissance-1)/prod.cout)/(Math.log(prod.croissance))
-        
-        return n;
+    if (prod == null) {
+        return (
+            <div>...</div>
+        )
     }
-        
-    if (prod == null){
-        return(
+
+    /*        let prix = Math.round(prod.cout*((Math.pow(prod.croissance,qtmulti)-1)/(prod.croissance-1)));
+            u0(1-c^n)/(1-c) < world.money dc n =
+        function calcMaxCanBuy(){
+            let n = Math.log(1+World.money*(prod.croissance-1)/prod.cout)/(Math.log(prod.croissance))
+            
+            return n;
+        } */
+
+    if (prod == null) {
+        return (
             <div></div>
         )
     }
 
-    
-        else {
-            return (<div className="product">
-                <div className="lesdeux">
-                    <div className="logo" onClick={() => startFabrication(prod)} ><img className="round" src={services.server + prod.logo} /></div>
-                    <div className="quantite">{prod.quantite}</div>
-                </div>
 
-                <div className="productcolonnedroite">
-                    <div className="lesdeux">
-                        <br></br>
-                        <div className="progressbar">
-                            <ProgressBar transitionDuration={"0.1s"} customLabel={" "}
-                                completed={progress} />
-                        </div>
-                        
-            
-                        <div className="revenu">Rapporte : {prod.revenu * prod.quantite} € </div>
+    else {
+        return (<div className="product">
+            <div className="lesdeux">
+                <div className="logo" onClick={() => startFabrication(prod)} ><img className="round" src={services.server + prod.logo} /></div>
+                <div className="quantite">{prod.quantite}</div>
+            </div>
+
+            <div className="productcolonnedroite">
+                <div className="lesdeux">
+                    <br></br>
+                    <div className="progressbar">
+                        <ProgressBar transitionDuration={"0.1s"} customLabel={" "}
+                            completed={progress} />
                     </div>
-                    <div className="productlignebas">
-                        <div><button className='prix' onClick={() => acheterProduit(prod)} disabled={world.money < prod.cout}>{/* Prix: {prix} */} {prod.cout} € </button></div>
-                        <div className='temps'>Temps restant : {prod.timeleft}s</div>
-                    </div>
+
+
+                    <div className="revenu">Rapporte : {prod.revenu * prod.quantite} € </div>
+                </div>
+                <div className="productlignebas">
+                    <div><button className='prix' onClick={() => acheterProduit(prod)} disabled={world.money < prod.cout * Number(qtmulti)}> {prod.cout} € x {qtmulti} </button></div>
+                    <div className='temps'>Temps restant : {prod.timeleft}s</div>
                 </div>
             </div>
-            )
-        }
-
-
+        </div>
+        )
     }
+
+
+}

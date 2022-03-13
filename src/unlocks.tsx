@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Services } from "./Services";
-import { Pallier, World,Product } from './world';
-import startFabrication from './Product';
-import { transform } from "./utils";
+import {  World,Product } from './world';
 
     type ManaProps ={
         world: World
@@ -30,27 +26,14 @@ import { transform } from "./utils";
                       <div className="infosGrid" id="infosUnlocks">
                       
                         {/* <div> {world.products.product[unlock.idcible - 1].name}</div> */}
-                        <div className="seuilGrid" id="unlockSeuil"> <span dangerouslySetInnerHTML={{ __html: transform(unlock.seuil) }} />  </div>
+                        <div className="seuilGrid" id="unlockSeuil"> {/* <span dangerouslySetInnerHTML={{ __html: transform(unlock.seuil) }} />  */} {unlock.seuil}</div>
                         <div > {unlock.typeratio} : x {unlock.ratio}</div>
                       </div>
                     </div>  
                   )
                   )}
               </div>
-              <div>
-                {world.allunlocks.pallier.filter(allunlock => !allunlock.unlocked).map( allunlock => (
-                    <div key={allunlock.idcible} className="allunlockgrid">
-                      <div className="logoGrid" id="allunlockLogo">
-                        <img alt="allunlock logo" className="round" src={services.server + allunlock.logo} />
-                      </div>
-                      <div className="infosGrid" id="infosAllunlock">
-                        <div className="seuilGrid" id="managerSeuil"> {allunlock.seuil}  </div>
-                        <div > {allunlock.typeratio} : x {allunlock.ratio}</div>
-                      </div>
-                    </div>  
-                  )
-                  )}
-              </div>
+  
             </div>
           </div>
    

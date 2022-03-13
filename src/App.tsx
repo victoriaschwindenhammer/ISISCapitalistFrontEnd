@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Services } from "./Services";
 import { World, Product } from './world';
@@ -8,6 +7,7 @@ import { transform } from "./utils";
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import Manager from "./managers";
 import Unlock from "./unlocks";
+import Allunlocks from "./allunlocks";
 import Cashupgrade from "./cashupgrades";
 import Badge from '@mui/material/Badge';
 
@@ -17,9 +17,9 @@ function App() {
   
   const [services, setServices] = useState(new Services(""))
   const [world, setWorld] = useState(new World())
-  let [qtmulti, setQtmulti] = useState(1);
-  let [value, setValue] = useState('Acheter 1');
-  let [count, setCount] = useState(0);
+  let [qtmulti, setQtmulti] = useState("1");
+  //let [value, setValue] = useState('Acheter 1');
+  //let [count, setCount] = useState(0);
   let [BadgeMana, setBadgeMana] = useState(0);
   
   
@@ -122,25 +122,25 @@ function App() {
 
   
   function multiplicateur() {
-    if (qtmulti == 1){
-            setValue('Acheter 10');
-            setQtmulti(10);
-            setCount(count + 1);
+    if (qtmulti == "1"){
+            //setValue('Acheter 10');
+            setQtmulti("10");
+            //setCount(count + 1);
           }else 
-          if (qtmulti == 10 ){
-            setValue('Acheter 100');
-            setQtmulti(100);
-            setCount(count + 1);
+          if (qtmulti == "10" ){
+            //setValue('Acheter 100');
+            setQtmulti("100");
+            //setCount(count + 1);
           }else
-          if (qtmulti == 100){
-            setValue('Acheter max');
-            setQtmulti(1000000);
-            setCount(count + 1);
+          if (qtmulti == "100"){
+            //setValue('Acheter max');
+            setQtmulti("MAX");
+            //setCount(count + 1);
           }else 
-          if (qtmulti == 1000000){
-            setValue('Acheter 1');
-            setQtmulti(1);
-            setCount(0);
+          if (qtmulti == "MAX"){
+            //setValue('Acheter 1');
+            setQtmulti("1");
+            //setCount(0);
             
         }
       }
@@ -179,7 +179,14 @@ function App() {
             <br></br>
           <button className="btnUnlocks" onClick={() => afficherUnlock()}> </button>
             <div> {showUnlock&&
-              <div className="modal"> <Unlock world={world} prod={world.products.product[0]} services={services} /> </div>
+              <div className="modal"> <div><Unlock world={world} prod={world.products.product[0]} services={services} /> </div>
+              <div><Unlock world={world} prod={world.products.product[1]} services={services} /> </div>
+              <div><Unlock world={world} prod={world.products.product[2]} services={services} /> </div>
+              <div><Unlock world={world} prod={world.products.product[3]} services={services} /> </div>
+              <div><Unlock world={world} prod={world.products.product[4]} services={services} /> </div>
+              <div><Unlock world={world} prod={world.products.product[5]} services={services} /> </div>
+              <div><Allunlocks world={world} services={services} /> </div>
+              </div>
       
             }
             <br></br>

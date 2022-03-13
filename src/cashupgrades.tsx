@@ -20,11 +20,17 @@ export default function Cashupgrade({ world, services }: ManaProps) {
                 if (u.typeratio = 'gain') {
                     world.products.product[u.idcible - 1].revenu = world.products.product[u.idcible - 1].revenu * u.ratio;
                 }
+                if (u.typeratio = 'vitesse') {
+                    world.products.product[u.idcible - 1].vitesse = world.products.product[u.idcible - 1].vitesse / u.ratio;
+                }
             }
             if (u.idcible == 0) {
                 for (let i = 0; i < world.products.product.length; i++) {
                     if (u.typeratio = 'gain') {
                         world.products.product[i].revenu = world.products.product[i].revenu * u.ratio;
+                    }
+                    if (u.typeratio = 'vitesse') {
+                        world.products.product[i].vitesse = world.products.product[i].vitesse / u.ratio;
                     }
                 }
             }
@@ -46,7 +52,7 @@ export default function Cashupgrade({ world, services }: ManaProps) {
                                 <img alt="cashupgrade logo" className="round" src={services.server + cashupgrade.logo} />
                             </div>
                             <div className="infosGrid" id="infoscashupgrades">
-                                <div className="seuilGrid" id="cashupgradeSeuil"> {cashupgrade.seuil}  </div>
+                                <div className="seuilGrid" id="cashupgradeSeuil"> {cashupgrade.seuil} €  </div>
                                 <div > {cashupgrade.typeratio} : x {cashupgrade.ratio}</div>
                             </div>
                             <div id="closebutton">
