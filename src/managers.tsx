@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Services } from "./Services";
-import { Pallier, World,Product } from './world';
-import startFabrication from './Product';
-import { badgeClasses, Snackbar } from '@mui/material';
+import { Pallier, World} from './world';
 
 
 
