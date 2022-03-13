@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosPromise } from "axios";
-import { World } from "./world";
+import { World,Pallier,Product } from "./world";
 
 export class Services {
     server = "http://localhost:8080/"
@@ -24,4 +24,23 @@ export class Services {
     headers: Services.setHeaders(this.user)
     }).catch(Services.handleError)
     }
+
+    putManager(manager : Pallier): AxiosPromise<Response> {
+        return axios({
+        method: 'put',
+        url: this.api + '/manager',
+        data: manager,
+        headers: Services.setHeaders(this.user)
+        }).catch(Services.handleError)
+       }
+
+       putProduct(product : Product): AxiosPromise<Response> {
+        return axios({
+        method: 'put',
+        url: this.api + '/product',
+        data: product,
+        headers: Services.setHeaders(this.user)
+        }).catch(Services.handleError)
+       }
+       
 }
