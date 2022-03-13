@@ -146,6 +146,7 @@ export default function ProductComponent({ prod, onProductionDone,qtmulti, servi
 
                 <div className="productcolonnedroite">
                     <div className="lesdeux">
+                        <br></br>
                         <div className="progressbar">
                             <ProgressBar transitionDuration={"0.1s"} customLabel={" "}
                                 completed={progress} />
@@ -155,8 +156,8 @@ export default function ProductComponent({ prod, onProductionDone,qtmulti, servi
                         <div className="revenu">Rapporte : {prod.revenu * prod.quantite} € </div>
                     </div>
                     <div className="productlignebas">
-                        <div><button onClick={() => acheterProduit(prod)} disabled={world.money < prod.cout}>{/* Prix: {prix} */} {prod.cout} € </button></div>
-                        <div>Temps restant : {prod.timeleft}s</div>
+                        <div><button className='prix' onClick={() => acheterProduit(prod)} disabled={world.money < prod.cout}>{/* Prix: {prix} */} {prod.cout} € </button></div>
+                        <div className='temps'>Temps restant : {prod.timeleft}s</div>
                     </div>
                 </div>
             </div>
