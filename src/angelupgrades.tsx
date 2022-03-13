@@ -47,8 +47,8 @@ export default function Angelupgrade({ world, services }: ManaProps) {
                                 <div className="seuilGrid" id="angelupgradeSeuil"> {angelupgrade.seuil} €  </div>
                                 <div > {angelupgrade.typeratio} : x {angelupgrade.ratio}</div>
                             </div>
-                            <div id="closebutton">
-                                <button onClick={() => acheterAngelupragde(angelupgrade)} disabled={world.money < angelupgrade.seuil}> Acheter ! </button>
+                            <div>
+                                <button className="btnangelup" onClick={() => acheterAngelupragde(angelupgrade)} disabled={world.money < angelupgrade.seuil}> Acheter ! </button>
                             </div>
                         </div>
                     )
