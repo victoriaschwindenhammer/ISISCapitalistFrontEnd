@@ -34,7 +34,7 @@ export default function Angelupgrade({ world, services }: ManaProps) {
     return (
         < div className="angelupgrade">
             <div>
-                <h1 className="title">Angel Upgrades</h1>
+                <h1 className="title">Un coup de pouce de l'au-dela pour faire fortune ! </h1>
             </div>
             <div>
                 <div>
@@ -44,7 +44,7 @@ export default function Angelupgrade({ world, services }: ManaProps) {
                                 <img alt="angelupgrade logo" className="round" src={services.server + angelupgrade.logo} />
                             </div>
                             <div className="infosGrid" id="infosangelupgrade">
-                                <div className="seuilGrid" id="angelupgradeSeuil"> {angelupgrade.seuil} €  </div>
+                                <div className="seuilGrid" id="angelupgradeSeuil"> {angelupgrade.seuil} Anges  </div>
                                 <div > {angelupgrade.typeratio} : x {angelupgrade.ratio}</div>
                             </div>
                             <div>

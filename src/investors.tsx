@@ -15,7 +15,7 @@ import { Pallier, World} from './world';
     return (
             < div className="Investor">
             <div>
-              <h1 className="title">Anges</h1>
+              <h1 className="title">Tu peux compter sur tes investisseurs pour te remettre sur le droit chemin !</h1>
             </div>
             <div>
             <img className="imageange" alt="angel logo"  src="../angeactif.png"  /> 
