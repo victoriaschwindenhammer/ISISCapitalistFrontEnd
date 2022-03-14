@@ -12,6 +12,7 @@ import { Pallier, World} from './world';
     export default function Manager({world, services}: ManaProps){
   
     function engagerManager(m: Pallier) {
+      services.putManager(m);
         if(world.money >= m.seuil){
           world.money= world.money-m.seuil;
           m.unlocked= true;

@@ -30,6 +30,7 @@ export default function ProductComponent({ prod, onProductionDone, qtmulti, serv
     }, [])
 
     function startFabrication(p: Product) {
+        services.putProduct(p);
         if (p.quantite > 0) {
             prod.timeleft = prod.vitesse;
             lastupdate = Date.now();
